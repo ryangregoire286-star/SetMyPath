@@ -10,7 +10,7 @@ function CommandSetPaths(command)
     return command
 end
 
-function SetupWindows(path, isRunnable, commandPassed)
+function SetupWindows(isRunnable, commandPassed)
     if isRunnable then
         print(UpperString("Application is Running"))
         return SetPath(commandPassed)
@@ -27,8 +27,12 @@ function ApplicationRun:new(value)
     return ins;
 end
 
+function ApplicationRun:Print(value)
+    print(CommandSetPaths(UpperString("You Just Ran " .. value .. " Command")))
+end
+
 function ApplicationRun:Run(command)
-    SetupWindows(command, true, "")
+    SetupWindows(true, command)
 end
 
 function UpperString(str)
@@ -39,6 +43,7 @@ function Run()
     print(CommandSetPaths(UpperString("Enter Path for Appliction: ")))
     local path = io.read()
     ApplicationRun:Run(CommandSetPaths("set PATH=%''" .. path));
+    ApplicationRun:Print(path)
 end
 
 Run()
